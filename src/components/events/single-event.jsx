@@ -20,13 +20,16 @@ const SingleEvent = ({ data }) => {
     }
 
     try {
-      const response = await fetch("/api/email-registration", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: emailValue, eventId: eventId }),
-      });
+      const response = await fetch(
+        `https://${process.env.VERCEL_URL}/api/email-registration`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: emailValue, eventId: eventId }),
+        }
+      );
 
       if (!response.ok) throw new Error(`Error: ${response.status}`);
       const data = await response.json();
